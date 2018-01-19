@@ -55,32 +55,32 @@ Thus, you may see what the state change and the transition function does. You ma
 ```
 
 The transition functions has several various:
-1. with full parameters
+1. with full parameters.
 for example:
 ```
 void mountLocalFS(int old_state, int event, int new_state, void* param);
 ```
 
-2. with one parameter
+2. with one parameter.
 for example:
 ```
 void mountLocalFS(void* param);
 ```
 
-3. without parameter
+3. without parameter.
 for example:
 ```
 void mountLocalFS(void);
 ```
 
 Hence, correspondingly, there is 2 trigger:
-1. Without data parameter
+1. Without data parameter.
 for example:
 ```
 sm.updateState(E_DEV_NOTIFY);
 ```
 
-2. With data parameter
+2. With data parameter.
 for example:
 ```
 sm.updateState(E_DEV_NOTIFY, data);
