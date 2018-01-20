@@ -1,11 +1,8 @@
-/* 
- * File:   test_sm.cpp
- * Author: woody
- *
- * Created on January 19, 2018, 6:28 PM
+/*
+ * Copyright (C) 2007 Woody.Lee All rights reserved.
  */
 #include <cstdlib>
-#include "statemachine.h"
+#include "c++/statemachine.h"
 
 // Event definition should be public
 enum {
