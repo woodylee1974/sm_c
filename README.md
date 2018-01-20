@@ -24,7 +24,7 @@ Where we should use state machine:
 When you find you have to do with a group of complex rule and conditions, you should consider to use state machine pattern. A simple example is like:
 
 * A device has 2 states, plugged, unplugged
-* This device driver only sends an event named "DEV_NOTIFY" to tell a change happen. Thus, a state machine is required to trace the state of device. When "DEV_NOTIFY" is received on the state - "INSERTED", we need to unmount local file system. A unmount() function needs to be called. Otherwise, when "DEV_NOTIFY" is received on the state - "UNPLUGGED", we need to mount local file system. The difference between you use state machine and you do not use is whether "strategy or rule" and "mechanism" is separated.
+* This device driver only sends an event named "DEV_NOTIFY" to tell a change happen. Thus, a state machine is required to trace the state of device. When "DEV_NOTIFY" is received on the state - "INSERTED", we need to unmount local file system and change the state from "INSERTED" to "UNPLUGGED". Otherwise, when "DEV_NOTIFY" is received on the state - "UNPLUGGED", we need to mount local file system and change from "UNPLUGGED" to "INSERTED". The difference between you use state machine and not use it is whether "rule" and "mechanism" is separated.
 
 Also, we may describe the rule by a state transition table, as the following
 
@@ -55,32 +55,32 @@ Thus, you may see what the state change and the transition function does. You ma
 ```
 
 The transition functions has several various:
-1. with full parameters
+1. with full parameters.
 for example:
 ```
 void mountLocalFS(int old_state, int event, int new_state, void* param);
 ```
 
-2. with one parameter
+2. with one parameter.
 for example:
 ```
 void mountLocalFS(void* param);
 ```
 
-3. without parameter
+3. without parameter.
 for example:
 ```
 void mountLocalFS(void);
 ```
 
 Hence, correspondingly, there is 2 trigger:
-1. Without data parameter
+1. Without data parameter.
 for example:
 ```
 sm.updateState(E_DEV_NOTIFY);
 ```
 
-2. With data parameter
+2. With data parameter.
 for example:
 ```
 sm.updateState(E_DEV_NOTIFY, data);
